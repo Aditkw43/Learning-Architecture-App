@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Todo App Vanilla JS</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <h1>Todo List</h1>
+  <input type="text" id="todo-input" placeholder="Add new todo" />
+  <button id="add-todo">Add</button>
+  <button id="clear-todo" class="danger">Clear</button>
+  <ul id="todo-list"></ul>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+<div id="confirm-modal" class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to clear all todos?</p>
+    <button id="confirm-yes">Yes</button>
+    <button id="confirm-no" class="danger">No</button>
+  </div>
+</div>
+
+</html>
