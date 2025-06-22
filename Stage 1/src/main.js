@@ -5,44 +5,85 @@ const input = document.getElementById('todo-input');
 const addButton = document.getElementById('add-todo');
 const clearButton = document.getElementById('clear-todo');
 const todoList = document.getElementById('todo-list');
+const modal = document.getElementById('confirm-modal');
+const confirmYes = document.getElementById('confirm-yes');
+const confirmNo = document.getElementById('confirm-no');
 
-function refresh() {
-  renderTodoList(getTodos(), todoList);
+let draggedEl = null;
+
+async function refresh() {
+  const todos = await getTodos();
+  renderTodoList(todos, todoList);
 }
 
-todoList.onclick = (e) => {
+async function handleAddTodo() {
+  const text = input.value.trim();
+  if (text) {
+    await addTodo(text);
+    input.value = '';
+    await refresh();
+  }
+}
+
+async function handleDeleteTodo(id) {
+  await deleteTodo(id);
+  await refresh();
+}
+
+async function handleUpdateTodo(id, updatedItem) {
+  await updateTodo(id, updatedItem);
+  await refresh();
+}
+
+function openModal() {
+  modal.classList.add('show');
+}
+
+function closeModal() {
+  modal.classList.remove('show');
+}
+
+async function updateOrder() {
+  const todos = await getTodos();
+  const newOrder = [...todoList.children].map((li, index) => ({
+    ...todos.find(t => t.id === +li.dataset.id),
+    sequence: index
+  }));
+
+  await Promise.all(newOrder.map(todo => updateTodo(todo.id, todo)));
+  await refresh();
+}
+
+todoList.addEventListener('click', async (e) => {
   const deleteButton = e.target.closest('.danger');
   if (deleteButton) {
-    deleteTodo(+deleteButton.dataset.id);
-    refresh();
+    await handleDeleteTodo(+deleteButton.dataset.id);
     return;
   }
 
   const checkbox = e.target.closest('input[type="checkbox"]');
   if (checkbox) {
     const id = +checkbox.closest('li').dataset.id;
-    updateTodo(id, { done: checkbox.checked });
-    refresh();
+    await handleUpdateTodo(id, { done: checkbox.checked });
   }
-};
+});
 
-addButton.onclick = () => {
-  const text = input.value.trim();
-  if (text) {
-    addTodo(text);
-    input.value = '';
-    refresh();
-  }
-};
+addButton.addEventListener('click', handleAddTodo);
 
-clearButton.onclick = () => {
-  if (confirm('Are you sure you want to clear all todos?')) {
-    clearTodos();
-    refresh();
-  }
-};
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') handleAddTodo();
+});
 
-let draggedEl = null;
+clearButton.addEventListener('click', openModal);
+
+confirmYes.addEventListener('click', async () => {
+  await clearTodos();
+  await refresh();
+  closeModal();
+});
+
+confirmNo.addEventListener('click', closeModal);
+
 todoList.addEventListener('dragstart', (e) => {
   draggedEl = e.target.closest('li');
   if (draggedEl) draggedEl.classList.add('dragging');
@@ -59,49 +100,8 @@ todoList.addEventListener('dragover', (e) => {
 });
 
 todoList.addEventListener('dragend', () => {
-  draggedEl.classList.remove('dragging');
+  if (draggedEl) draggedEl.classList.remove('dragging');
   updateOrder();
-});
-
-function updateOrder() {
-  const newOrder = [...todoList.children].map((li, index) => ({
-    ...getTodos().find(t => t.id === +li.dataset.id),
-    order: index
-  }));
-
-  newOrder.forEach(todo => updateTodo(todo.id, todo));
-  refresh();
-}
-
-const modal = document.getElementById('confirm-modal');
-const confirmYes = document.getElementById('confirm-yes');
-const confirmNo = document.getElementById('confirm-no');
-
-clearButton.onclick = () => {
-  modal.classList.add('show');
-};
-
-function closeModal() {
-  modal.classList.remove('show');
-}
-
-confirmYes.onclick = () => {
-  clearTodos();
-  refresh();
-  closeModal();
-};
-
-confirmNo.onclick = closeModal;
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const text = input.value.trim();
-        if (text) {
-        addTodo(text);
-        input.value = '';
-        refresh();
-        }
-    }
 });
 
 window.refresh = refresh;

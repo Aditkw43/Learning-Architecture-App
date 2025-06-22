@@ -1,0 +1,35 @@
+Saya adalah software engineer dengan pengalaman 3 tahun, lebih banyak menggunakan JavaScript, TypeScript, dan C#. Saat ini saya serius belajar membangun aplikasi dengan **arsitektur yang baik, maintainable, dan scalable**.
+
+Progress pembelajaran saya sejauh ini:
+
+✅ **Frontend (Vanilla JS)**
+- Struktur folder modular → components, services, utils.
+- CRUD Todo List → menggunakan modular components.
+- Animasi → hover, drag-and-drop dengan efek animasi "laut" + efek "api" menyala pada hover.
+- Integrasi ke backend Go → menggunakan Fetch API.
+- Belum menerapkan **state management dengan observer pattern/pub-sub** → rencana berikutnya.
+
+✅ **Backend (Go)**
+- Struktur folder clean → cmd/, internal/, pkg/, db/.
+- CRUD API (GET, POST, PUT, DELETE) → awalnya in-memory.
+- Integrasi SQLite → database persistent → CRUD berjalan sempurna.
+- Sudah mengimplementasikan middleware CORS → untuk integrasi frontend.
+- Belum ada authentication → **Auth sederhana next**.
+
+⚠️ **Git Workflow**
+- Sudah paham dasar → git init, commit, remote, push.
+- Belum mendalami workflow cabang (branch), pull request, CI/CD.
+
+❗ **Testing**
+- Belum ada testing API → next menggunakan Postman atau Go testing package.
+
+❗ **Deployment**
+- Belum deploy → rencana menggunakan Railway (backend Go), Vercel/Netlify (frontend).
+- Belum setup CI/CD → next jika sudah deploy manual.
+
+🎯 **Tujuan Akhir**
+- Membangun project **real-world scalable** → aplikasi todo → berkembang jadi task manager → dengan struktur folder arsitektur yang rapi.
+- Fokus **mempelajari arsitektur aplikasi**.
+- Proyek ini ditargetkan jadi **portfolio project profesional.**
+
+➡️ **Lanjutkan pembelajaran saya dari sini. Fokus utama: Arsitektur aplikasi, refactor state management frontend, implementasi Auth, deployment, lalu lanjut ke testing.**

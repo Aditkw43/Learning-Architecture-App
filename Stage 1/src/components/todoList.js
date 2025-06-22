@@ -9,7 +9,7 @@ export function renderTodoList(todos, container) {
 
     li.innerHTML = `
       <input type="checkbox" ${todo.done ? 'checked' : ''}>
-      <span class="todo-text" style="text-decoration: ${todo.done ? 'line-through' : 'none'}">${todo.text}</span>
+      <span class="todo-text" style="text-decoration: ${todo.done ? 'line-through' : 'none'}">${todo.title}</span>
       <button class="danger" data-id="${todo.id}">X</button>
     `;
 
