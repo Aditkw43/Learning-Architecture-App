@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observer Pattern</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        li button {
+            margin-left: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        li button:hover {
+            background-color: #c82333;
+        }
+        .unsubscribe {
+            background-color: #ffc107;
+            color: black;
+        }
+        .unsubscribe:hover {
+            background-color: #e0a800;
+        }
+        #todo-list {
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        #todo-count {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <input type="text" id="todo-input" placeholder="Tambah todo..." />
+    <button id="add-todo">Tambah</button>
+
+    <button id="subscribe-ui">Subscribe Render</button>
+    <button id="subscribe-log">Subscribe Log</button>
+    <button id="subscribe-counter">Subscribe Counter</button>
+
+    <button class='unsubscribe' id="unsubscribe-ui">Unsubscribe Render</button>
+    <button class='unsubscribe' id="unsubscribe-log">Unsubscribe Log</button>
+    <button class='unsubscribe' id="unsubscribe-counter">Unsubscribe Counter</button>
+
+    <ul id="todo-list"></ul>
+    <p id="todo-count">Jumlah Todo: 0</p>
+
+
+    <script src="main.js"></script>
+</body>
+</html>
